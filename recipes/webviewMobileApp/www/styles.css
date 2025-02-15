@@ -1,0 +1,40 @@
+body {
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+    font-family: Arial, sans-serif;
+    padding-top: 150px;
+}
+
+.counter-container {
+    border-radius: 20px;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.counter {
+    font-size: 48px;
+    color: #5353c3;
+    font-weight: 900;
+    margin: 20px 0;
+}
+
+button {
+    background-color: #5353c3;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 20px 20px;
+    font-size: 18px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
