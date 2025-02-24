@@ -1,0 +1,52 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: #213547;;
+  background-color: #fff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 14px;
+  border: 1px solid transparent;
+  padding: 14px 30px;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #5353c3c2;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+}
+
+.screen {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.title {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  text-align: center;
+  top: 300px;
+}
