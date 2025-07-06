@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+    <title>Canvas animation example</title>
+</head>
+<body>
+    <canvas></canvas>
+</body>
+<script>
+    const canvas = document.querySelector('canvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.style.background = '#000';
+
+    const ctx = canvas.getContext('2d');
+
+    function renderCircle(posX) {
+        const posY = window.innerHeight / 2;
+        ctx.beginPath();
+        ctx.arc(posX, posY, 10, 0, Math.PI * 2);
+        ctx.fillStyle = '#fff';
+        ctx.fill();
+        ctx.stroke();
+    }
+
+    function clearCanvas() {
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    }
+
+    renderCircle(20);
+    clearCanvas();
+
+    let startTime = 0;
+    let circlePosition = 20;
+    let velocity = 5;
+
+    function animationMoveCircle(timeStamp) {
+        const deltaTime = timeStamp - startTime;
+
+        if (deltaTime >= 16.6) {
+            
+            if ((circlePosition >= window.innerWidth - 10) || (circlePosition <= 10))
+                velocity = -velocity;
+
+            circlePosition = circlePosition + velocity;
+
+            clearCanvas();
+            renderCircle(circlePosition);
+        }
+
+        requestAnimationFrame(animationMoveCircle);
+    }
+
+    animationMoveCircle();
+</script>
+</html>
