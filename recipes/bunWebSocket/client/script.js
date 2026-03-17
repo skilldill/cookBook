@@ -1,10 +1,17 @@
 let ws = null;
+let es = null;
 
 const connectButton = document.getElementById('connectButton');
 const pingButton = document.getElementById('pingButton');
 const messages = document.getElementById('messages');
 
-function connect() {
+function addMessage(text) {
+    const li = document.createElement('li');
+    li.textContent = text;
+    messages.appendChild(li);
+}
+
+function connectWS() {
     ws = new WebSocket('ws://localhost:4000/ws');
 
     ws.addEventListener('open', () => {
@@ -20,17 +27,41 @@ function connect() {
     });
 
     ws.addEventListener('message', (event) => {
-        const message = event.data;
-        const li = document.createElement('li');
-        li.textContent = message;
-        messages.appendChild(li);
+        addMessage(`WS: ${event.data}`);
     });
 }
 
+function connectSSE() {
+    es = new EventSource('http://localhost:4000/events');
+
+    es.onopen = () => {
+        addMessage('SSE: CONNECTED');
+    };
+
+    es.onmessage = (event) => {
+        addMessage(`SSE: ${event.data}`);
+    };
+
+    es.onerror = () => {
+        addMessage('SSE: ERROR');
+    };
+}
+
 function disconnect() {
-    if (!ws) return;
-    ws.close();
-    ws = null;
+    if (ws) {
+        ws.close();
+        ws = null;
+    }
+
+    if (es) {
+        es.close();
+        es = null;
+    }
+}
+
+function connect() {
+    connectWS();
+    connectSSE();
 }
 
 function ping() {
@@ -39,7 +70,7 @@ function ping() {
 }
 
 function handleClick() {
-    if (ws) {
+    if (ws || es) {
         disconnect();
     } else {
         connect();
